@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件\Mesh">
+      <UniqueIdentifier>{1d736148-9d72-4dd2-b65c-3057a0e6fe51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Engine">
+      <UniqueIdentifier>{4ada69a2-824c-4582-9168-4d56c9cb6480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Mesh">
+      <UniqueIdentifier>{fd7839a2-9c90-487e-a708-c3f08c2c963d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Engine">
+      <UniqueIdentifier>{3bdc2fa6-c10c-4b7c-a9c1-f64d0610a379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MoveObject">
+      <UniqueIdentifier>{5f377d55-0c52-4143-8554-4f09fb63e1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\MoveObject">
+      <UniqueIdentifier>{4f1f1776-7a58-45e3-a765-ebaef69cdb93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Input">
+      <UniqueIdentifier>{3e6c2a32-da99-43e9-ab0f-53aa89b54479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Input">
+      <UniqueIdentifier>{87e1e391-9d21-4867-8df7-45eebeb94959}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Animation.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bone.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshLoader.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MS3DMeshLoader.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Skeleton.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WindowEventUtilities.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DynLib.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineObject.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FileDataStream.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Frustum.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HardwareBuffer.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IteratorWrapper.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Material.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MaterialManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Plane.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PLugin.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderData.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderSystem.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderTarget.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderWindow.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Root.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderParam.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderParamTable.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VertexElement.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\VideoManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Viewport.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MovableObject.cpp">
+      <Filter>源文件\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MovableRect.cpp">
+      <Filter>源文件\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshManager.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Node.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneNode.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AutoShaderParam.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RegisterData.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mouse.cpp">
+      <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\KeyBoard.cpp">
+      <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Texture.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SubMesh.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>源文件\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainSection.cpp">
+      <Filter>源文件\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Terrain.cpp">
+      <Filter>源文件\MoveObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputSystem.cpp">
+      <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OgreMeshLoader.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StringHelper.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextureUnitState.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TexUnitManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Shader.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GpuProgram.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GpuProgramManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GpuTypeManager.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Images.cpp">
+      <Filter>源文件\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DreamMeshLoader.cpp">
+      <Filter>源文件\Mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Animation.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Bone.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MS3D.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MS3DMeshLoader.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MeshLoader.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Mesh.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Skeleton.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SubMesh.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Camera.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WindowEventUtilities.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DreamEngine.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DynLib.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EngineDefine.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EngineError.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EngineObject.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\FileDataStream.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Frustum.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\HardwareBuffer.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Include.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\IteratorWrapper.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Material.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MaterialManager.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Plane.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PLugin.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RenderData.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RenderStateDefine.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RenderSystem.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RenderTarget.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RenderWindow.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceFactory.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Root.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneManager.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ShaderParam.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ShaderParamTable.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Singleton.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VertexElement.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\VideoManager.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Viewport.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MovableObject.h">
+      <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MovableRect.h">
+      <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Entity.h">
+      <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MeshManager.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Node.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SceneNode.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\AutoShaderParam.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\RegisterData.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\KeyBoard.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Mouse.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Texture.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TerrainSection.h">
+      <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Terrain.h">
+      <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\InputDefine.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\InputSystem.h">
+      <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MeshDefine.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\StringHelper.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TextureUnitState.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\OgreMeshDefine.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\OgreMeshLoader.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EngineEnum.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shader.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GpuProgram.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GpuProgramManager.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GpuTypeManager.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Images.h">
+      <Filter>头文件\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DreamMeshLoader.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DreamMeshDefine.h">
+      <Filter>头文件\Mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

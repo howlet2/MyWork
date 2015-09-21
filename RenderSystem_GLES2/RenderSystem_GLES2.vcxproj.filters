@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Include\GLES2RenderSystem.h" />
+    <ClInclude Include="Include\GLES2RenderWindow.h" />
+    <ClInclude Include="Include\EGLView.h" />
+    <ClInclude Include="Include\GLES2Plugin.h" />
+    <ClInclude Include="Include\GLES2Define.h" />
+    <ClInclude Include="Include\GLES2Error.h" />
+    <ClInclude Include="Include\CommonFunction.h" />
+    <ClInclude Include="Include\GLES2IndexBuffer.h" />
+    <ClInclude Include="Include\GLES2VertexBuffer.h" />
+    <ClInclude Include="Include\GLES2VideoManager.h" />
+    <ClInclude Include="Include\GLES2GLSLProgram.h" />
+    <ClInclude Include="Include\GLES2GLSLShader.h" />
+    <ClInclude Include="Include\GLES2Enum.h" />
+    <ClInclude Include="Include\GLES2GpuProgramManager.h" />
+    <ClInclude Include="Include\GLES2GpuTypeManager.h" />
+    <ClInclude Include="Include\GLES2Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\GLES2RenderWindow.cpp" />
+    <ClCompile Include="Source\GLES2RenderSystem.cpp" />
+    <ClCompile Include="Source\EGLView.cpp" />
+    <ClCompile Include="Source\GLES2Plugin.cpp" />
+    <ClCompile Include="Source\CommonFunction.cpp" />
+    <ClCompile Include="Source\GLES2IndexBuffer.cpp" />
+    <ClCompile Include="Source\GLES2VertexBuffer.cpp" />
+    <ClCompile Include="Source\GLES2VideoManager.cpp" />
+    <ClCompile Include="Source\GLES2GLSLProgram.cpp" />
+    <ClCompile Include="Source\GLES2GLSLShader.cpp" />
+    <ClCompile Include="Source\GLES2GpuProgramManager.cpp" />
+    <ClCompile Include="Source\GLES2GpuTypeManager.cpp" />
+    <ClCompile Include="Source\GLES2Texture.cpp" />
+  </ItemGroup>
+</Project>
