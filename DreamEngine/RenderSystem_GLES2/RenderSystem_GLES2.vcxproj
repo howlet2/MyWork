@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\CommonFunction.h" />
+    <ClInclude Include="Include\GLES2Enum.h" />
+    <ClInclude Include="Include\GLES2GLSLProgram.h" />
+    <ClInclude Include="Include\GLES2GpuProgramManager.h" />
+    <ClInclude Include="Include\GLES2GpuTypeManager.h" />
+    <ClInclude Include="Include\GLES2Texture.h" />
+    <ClInclude Include="Include\GLES2VideoManager.h" />
+    <ClInclude Include="Include\EGLView.h" />
+    <ClInclude Include="Include\GLES2Error.h" />
+    <ClInclude Include="Include\GLES2Define.h" />
+    <ClInclude Include="Include\GLES2IndexBuffer.h" />
+    <ClInclude Include="Include\GLES2Plugin.h" />
+    <ClInclude Include="Include\GLES2RenderSystem.h" />
+    <ClInclude Include="Include\GLES2RenderWindow.h" />
+    <ClInclude Include="Include\GLES2VertexBuffer.h" />
+    <ClInclude Include="Include\GLES2GLSLShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\CommonFunction.cpp" />
+    <ClCompile Include="Source\GLES2GLSLProgram.cpp" />
+    <ClCompile Include="Source\GLES2GpuProgramManager.cpp" />
+    <ClCompile Include="Source\GLES2GpuTypeManager.cpp" />
+    <ClCompile Include="Source\GLES2Texture.cpp" />
+    <ClCompile Include="Source\GLES2VideoManager.cpp" />
+    <ClCompile Include="Source\EGLView.cpp" />
+    <ClCompile Include="Source\GLES2IndexBuffer.cpp" />
+    <ClCompile Include="Source\GLES2Plugin.cpp" />
+    <ClCompile Include="Source\GLES2RenderSystem.cpp" />
+    <ClCompile Include="Source\GLES2RenderWindow.cpp" />
+    <ClCompile Include="Source\GLES2VertexBuffer.cpp" />
+    <ClCompile Include="Source\GLES2GLSLShader.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B3066BAC-4BE1-4604-BD2F-BC7AE9370CC2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RenderSystem_GLES2</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>.\lib</OutDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;RENDERSYSTEM_GLES2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\DreamEngine\include;..\Math\include;.\include;..\thirdpart\Gles2\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\thirdpart\Gles2\lib;..\DreamEngine\lib;..\Math\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>math_d.lib;dreamengine_d.lib;libEGL.lib;libGLESv2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy .\lib\RenderSystem_GLES2_d.dll ..\Sample_Winodw\bin</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;RENDERSYSTEM_GLES2_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
