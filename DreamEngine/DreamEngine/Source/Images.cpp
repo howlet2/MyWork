@@ -27,7 +27,7 @@ CImages::~CImages(void)
 	SAFE_DELETE_ARRY(m_pData);
 }
 
-m_byte* CImages::loadFromFile(const CString& fileName)
+bool CImages::loadFromFile(const CString& fileName)
 {
 	CFileDataStream file;
 	if (file.open(fileName, CFileDataStream::READ_BINARY))
@@ -47,8 +47,63 @@ m_byte* CImages::loadFromFile(const CString& fileName)
 		}
 		
 		file.close();
+		return true;
 	}
-	return m_pData;
+	return false;
+}
+
+bool CImages::saveToFile(const CString& fileName)
+{
+	if (fileName.length()<4) return false;
+
+	if (CString::npos != fileName.find(".png"))
+	{
+		return saveToPng(fileName);
+	}
+	else if (CString::npos != fileName.find(".jpg"))
+	{
+		return saveToJpg(fileName);
+	}
+
+	return true;
+}
+
+CImages* CImages::makeImage(m_byte* pData, int width, int height, TEX_FORMAT texFormat)
+{
+	CImages* pImage		= new CImages;
+	pImage->m_width		= width;
+	pImage->m_height	= height;
+	pImage->m_texFormat = texFormat;
+	int pixelPerBytes = formatToPixelPerBytes(texFormat);
+	pImage->m_pixelPerBytes = pixelPerBytes;
+
+	int totalSize = width*height*pixelPerBytes;
+	pImage->m_pData  = new m_byte[totalSize];
+	memcpy(pImage->m_pData, pData, totalSize);
+
+	return pImage;
+}
+
+int CImages::formatToPixelPerBytes(TEX_FORMAT format)
+{
+	switch (format)
+	{
+	case DreamEngine::TF_R8G8B8:
+		return 3;
+	
+	case DreamEngine::TF_R8G8B8A8:
+	case DreamEngine::TF_A8R8G8B8:
+		return 4;
+	
+	case DreamEngine::TF_L8:
+		return 1;
+
+	case DreamEngine::TF_UNKOWN:
+		return 0;
+	default:
+		break;
+	}
+	return 0;
 }
 
 bool CImages::isTga(m_byte* header)
@@ -367,6 +422,167 @@ m_byte* CImages::initWithJpegFile(CFileDataStream& fileData)
     } while (0);
 
     return m_pData;
+}
+
+bool CImages::saveToJpg(const CString& filePath)
+{
+	bool bRet = false;
+	do 
+	{
+		struct jpeg_compress_struct cinfo;
+		struct jpeg_error_mgr jerr;
+		FILE * outfile;                 /* target file */
+		JSAMPROW row_pointer[1];        /* pointer to JSAMPLE row[s] */
+		int     row_stride;          /* physical row width in image buffer */
+
+		cinfo.err = jpeg_std_error(&jerr);
+		/* Now we can initialize the JPEG compression object. */
+		jpeg_create_compress(&cinfo);
+
+		outfile = fopen(filePath.c_str(), "wb");
+		if (outfile==MATH_NULL) return false;
+
+		jpeg_stdio_dest(&cinfo, outfile);
+
+		cinfo.image_width = m_width;			/* image width and height, in pixels */
+		cinfo.image_height = m_height;
+		cinfo.input_components = 3;				/* # of color components per pixel */
+		cinfo.in_color_space = JCS_RGB;			/* colorspace of input image */
+
+		jpeg_set_defaults(&cinfo);
+
+		jpeg_start_compress(&cinfo, TRUE);
+
+		row_stride = m_width*3;				/* JSAMPLEs per row in image_buffer */
+
+		bool hasAlpha = (m_texFormat==TF_A8R8G8B8 || m_texFormat==TF_R8G8B8A8);
+		if (hasAlpha)
+		{
+			unsigned char *pTempData = new unsigned char[m_width*m_height*3];
+			if (NULL == pTempData)
+			{
+				jpeg_finish_compress(&cinfo);
+				jpeg_destroy_compress(&cinfo);
+				fclose(outfile);
+				break;
+			}
+
+			for (int i=0; i<m_height; ++i)
+			{
+				for (int j=0; j<m_width; ++j)
+				{
+					pTempData[(i*m_width+j)*3]		= m_pData[(i*m_width+j)*4];
+					pTempData[(i*m_width+j)*3+1]	= m_pData[(i*m_width+j)*4+1];
+					pTempData[(i*m_width+j)*3+2]	= m_pData[(i*m_width+j)*4+2];
+				}
+			}
+
+			while (cinfo.next_scanline < cinfo.image_height) 
+			{
+				row_pointer[0] = & pTempData[cinfo.next_scanline*row_stride];
+				(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+			}
+
+			SAFE_DELETE_ARRY(pTempData);
+		} 
+		else
+		{
+			while (cinfo.next_scanline < cinfo.image_height) {
+				row_pointer[0] = & m_pData[cinfo.next_scanline * row_stride];
+				(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
+			}
+		}
+
+		jpeg_finish_compress(&cinfo);
+		fclose(outfile);
+		jpeg_destroy_compress(&cinfo);
+
+		bRet = true;
+	} while (false);
+	return bRet;
+}
+
+bool CImages::saveToPng(const CString& filePath)
+{
+	bool bRet = false;
+	do 
+	{
+		FILE *fp;
+		png_structp png_ptr;
+		png_infop info_ptr;
+		png_colorp palette;
+		png_bytep *row_pointers;
+
+		fp = fopen(filePath.c_str(), "wb");
+		if (fp==MATH_NULL) return false;
+
+		png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, MATH_NULL, MATH_NULL, MATH_NULL);
+		if (MATH_NULL == png_ptr)
+		{
+			fclose(fp);
+			break;
+		}
+
+		info_ptr = png_create_info_struct(png_ptr);
+		if (MATH_NULL == info_ptr)
+		{
+			fclose(fp);
+			png_destroy_write_struct(&png_ptr, MATH_NULL);
+			break;
+		}
+		png_init_io(png_ptr, fp);
+
+		bool hasAlpha = m_texFormat==TF_A8R8G8B8 || m_texFormat==TF_R8G8B8A8;
+		if (hasAlpha)
+		{
+			png_set_IHDR(png_ptr, info_ptr, m_width, m_height, 8, PNG_COLOR_TYPE_RGB_ALPHA,
+				PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+		} 
+		else
+		{
+			png_set_IHDR(png_ptr, info_ptr, m_width, m_height, 8, PNG_COLOR_TYPE_RGB,
+				PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+		}
+
+		palette = (png_colorp)png_malloc(png_ptr, PNG_MAX_PALETTE_LENGTH * sizeof (png_color));
+		png_set_PLTE(png_ptr, info_ptr, palette, PNG_MAX_PALETTE_LENGTH);
+		png_write_info(png_ptr, info_ptr);
+		png_set_packing(png_ptr);
+
+		row_pointers = (png_bytep *)malloc(m_height*sizeof(png_bytep));
+		if(row_pointers == MATH_NULL)
+		{
+			fclose(fp);
+			png_destroy_write_struct(&png_ptr, &info_ptr);
+			break;
+		}
+
+		if (!hasAlpha)
+		{
+			for (int i = 0; i < (int)m_height; i++)
+				row_pointers[i] = (png_bytep)m_pData + i*m_width*3;
+
+			png_write_image(png_ptr, row_pointers);
+			free(row_pointers);
+			row_pointers = MATH_NULL;
+		}
+		else
+		{
+			for (int i = 0; i < (int)m_height; i++)
+				row_pointers[i] = (png_bytep)m_pData+i*m_width*4;
+			png_write_image(png_ptr, row_pointers);
+		}
+
+		png_write_end(png_ptr, info_ptr);
+		png_free(png_ptr, palette);
+		palette = MATH_NULL;
+
+		png_destroy_write_struct(&png_ptr, &info_ptr);
+		fclose(fp);
+
+		bRet = true;
+	} while (false);
+	return bRet;
 }
 
 void CImages::_initComposeTgaFile(CFileDataStream& fileData, m_byte* pData, int dataSize)

@@ -29,13 +29,14 @@ Error CGLSLShaderBase::loadShader(ShaderType type)
 	}
 	
 	m_glShader = glCreateShader(glShaderType);
+	
 	const char* pSource = m_strSource.c_str();
-	glShaderSource(m_glShader, 1, &pSource, NULL);						
+	glShaderSource(m_glShader, 1, &pSource, NULL);	
+	
 	glCompileShader(m_glShader);										
-
-	GLint compiler = GL_TRUE;
-	glGetShaderiv(m_glShader, GL_SHADER_COMPILER, &compiler);			
-	if (compiler != GL_TRUE)
+	GLint compiler=GL_FALSE;
+	glGetShaderiv(m_glShader, GL_COMPILE_STATUS, &compiler);
+	if (compiler==GL_FALSE)
 	{
 		GLint infoLen;
 		glGetShaderiv(m_glShader, GL_INFO_LOG_LENGTH, &infoLen);		
@@ -49,7 +50,6 @@ Error CGLSLShaderBase::loadShader(ShaderType type)
 		glDeleteShader(m_glShader);
 		return ERROR_CREATE_FRAGMENT_SHADER_FAILD;
 	}
-
 	return ERROR_OK;
 }
 

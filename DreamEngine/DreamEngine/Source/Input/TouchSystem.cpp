@@ -21,7 +21,7 @@ CTouchSystem* CTouchSystem::instancePtr(void)
 	return m_singleton; 
 }
 
-void CTouchSystem::update()
+void CTouchSystem::update(float delay)
 {
 #ifdef WIN32
 	POINT pt;

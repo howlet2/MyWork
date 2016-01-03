@@ -8,6 +8,7 @@ CMovableObject::CMovableObject(CRenderSystem* pRenderSystem, const CString& name
 	m_name(name),
 	m_pRenderSystem(pRenderSystem),
 	m_pSceneNode(MATH_NULL),
+	m_pMaterial(MATH_NULL),
 	m_trangleCount(0)
 {
 

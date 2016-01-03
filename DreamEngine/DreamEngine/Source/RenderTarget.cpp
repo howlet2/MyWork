@@ -37,21 +37,17 @@ void CRenderTarget::addListener(CRenderTargetListener* pListener)
 	m_listenerTargetIter.set(m_pListeners.begin(), m_pListeners.end());
 }
 
-void CRenderTarget::updateFPS()
+void CRenderTarget::updateFPS(float delay)
 {
-	static Math::CTimer time;
-	static Math::m_dwrd last = time.getMillisecondsCPU();
 	static int frameCount = 0;
+	static float timeUse  = 0.0f;
 
-	++frameCount;
-
-	Math::m_dwrd cur = time.getMicrosecondsCPU();
-	float timeUse = float(cur-last);
-
+	timeUse += delay;
 	if (timeUse > 1000.0f)
 	{
-		m_avgFPS = float(frameCount)/(cur-last)*1000;
-		last = cur;
+		m_avgFPS = float(frameCount)/(timeUse)*1000;
+		frameCount = 0;
+		timeUse = 0.0f;
 	}
 }
 

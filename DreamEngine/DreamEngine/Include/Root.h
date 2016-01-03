@@ -43,6 +43,8 @@ public:
 	void					go(void);
 	void					loop(void);
 
+	float					calculateTimeDelay();
+
 protected:
 
 	CRenderSystem*			m_pCurRenderSystem;

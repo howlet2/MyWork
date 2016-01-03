@@ -3,6 +3,7 @@
 #include "MovableObject/MovableObject.h"
 #include "MovableObject/MovableRect.h"
 #include "MovableObject/Sprite.h"
+#include "MovableObject/FrameAniSprite.h"
 
 #include "RenderSystem.h"
 #include "Camera.h"
@@ -30,8 +31,11 @@ public:
 
 	CTestMovable*		createTestMovale(const CString& name);
 	CSprite*			createSprite(const CString& name, const CString& fileName);
+	CFrameAniSprite*	createFrameAniSprite(const CString& name, const char* pFileName, ...);
 
-	virtual void		onRender(void);
+	CFrameAniSprite*	createFrameAniSprite(const CString& name, const CString& fileName);
+
+	virtual void		onRender(float delay);
 	virtual void		onLostDevice();
 	virtual void		onResetDevice();
 	virtual void		onDestory();

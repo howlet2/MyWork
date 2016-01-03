@@ -126,14 +126,8 @@ D3DFORMAT	CCommonFunction::texFormatToD3DFormat(TEX_FORMAT texFormat)
 	case TF_A8R8G8B8:
 		return  D3DFMT_A8B8G8R8;
 
-	case TF_X8R8G8B8:
-		return D3DFMT_X8R8G8B8;
-
 	case TF_L8:
 		return D3DFMT_L8;
-
-	case TF_X8L8V8U8:
-		return D3DFMT_X8L8V8U8;
 
 	default: return D3DFMT_FORCE_DWORD;
 	}
@@ -149,14 +143,8 @@ TEX_FORMAT	CCommonFunction::D3DFormatToTexFormat(D3DFORMAT texFormat)
 	case D3DFMT_A8B8G8R8:
 		return  TF_A8R8G8B8;
 
-	case D3DFMT_X8R8G8B8:
-		return TF_X8R8G8B8;
-
 	case D3DFMT_L8:
 		return  TF_L8;
-
-	case D3DFMT_X8L8V8U8:
-		return TF_X8L8V8U8;
 
 	default: return TF_UNKOWN;
 	}

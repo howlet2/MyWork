@@ -43,6 +43,7 @@ protected:
 private:
 
 	int				caulateUnpackAlignment(GLint widht);
+	void			buildTexture(void);
 
 protected:
 

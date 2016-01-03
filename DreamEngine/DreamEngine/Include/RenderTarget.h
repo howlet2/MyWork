@@ -43,7 +43,7 @@ public:
 	void				addListener(CRenderTargetListener* pListener);
 	CViewport*			addViewport(CCamera* pCamera);
 
-	void				updateFPS(void);
+	void				updateFPS(float delay);
 	float				getFPS(void)const;
 
 protected:

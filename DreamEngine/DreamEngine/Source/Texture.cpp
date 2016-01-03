@@ -163,8 +163,6 @@ int CTexture::caculatePixelByte(CTexture* pTexture)
 	switch(pTexture->getFormat())
 	{
 	case TF_A8R8G8B8:
-	case TF_X8R8G8B8:
-	case TF_X8L8V8U8:
 	case TF_R8G8B8A8:
 		return 4;
 

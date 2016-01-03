@@ -10,16 +10,21 @@ namespace DreamEngine
 		{
 			m_singleton = static_cast< T* >( this );
 		}
+
 		~CSingleton(void)
 		{  
 			m_singleton = 0;  
 		}
+
 		static T& instance(void)
 		{	
-			return (*m_singleton); 
+			return *instancePtr(); 
 		}
+
 		static T* instancePtr(void)
 		{ 
+// 			if (m_singleton==MATH_NULL)
+// 				m_singleton=new T;
 			return m_singleton; 
 		}
 

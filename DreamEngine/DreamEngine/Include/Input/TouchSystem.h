@@ -36,7 +36,7 @@ public:
 
 	State		getState()const			{return m_touchState.state;}
 
-	void		update();
+	void		update(float delay);
 
 private:
 

@@ -31,6 +31,12 @@
     <Filter Include="源文件\Input">
       <UniqueIdentifier>{87e1e391-9d21-4867-8df7-45eebeb94959}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Animation">
+      <UniqueIdentifier>{9359cbaf-a423-44c6-b9f5-2976281b21cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Animation">
+      <UniqueIdentifier>{31dd8390-5f29-46c4-8688-fe7854ff519c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp">
@@ -149,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="Source\Input\TouchSystem.cpp">
       <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation\FrameAnimation.cpp">
+      <Filter>源文件\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MovableObject\FrameAniSprite.cpp">
+      <Filter>源文件\MoveObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +307,12 @@
     </ClInclude>
     <ClInclude Include="Include\Input\TouchSystem.h">
       <Filter>头文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Animation\FrameAnimation.h">
+      <Filter>头文件\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MovableObject\FrameAniSprite.h">
+      <Filter>头文件\MoveObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

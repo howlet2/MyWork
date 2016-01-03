@@ -89,12 +89,40 @@ CSprite* CSceneManager::createSprite(const CString& name, const CString& fileNam
 	return pSprite;
 }
 
-void CSceneManager::onRender()
+CFrameAniSprite* CSceneManager::createFrameAniSprite(const CString& name, const char* pFileName, ...)
+{
+	CFrameAniSprite* pFrameAniSprite = new CFrameAniSprite(m_pRenderSystem, name);
+	
+	va_list argp; 
+	va_start (argp, pFileName); 
+	pFrameAniSprite->initWithFilesByValst(pFileName, argp);
+	va_end (argp); 
+
+	pFrameAniSprite->onCreate();
+
+	m_movableLsts.push_back(pFrameAniSprite);
+	return pFrameAniSprite;
+}
+
+CFrameAniSprite* CSceneManager::createFrameAniSprite(const CString& name, const CString& fileName)
+{
+	CFrameAniSprite* pFrameAniSprite = new CFrameAniSprite(m_pRenderSystem, name);
+	pFrameAniSprite->initWithAnimationFile(fileName);
+
+	m_movableLsts.push_back(pFrameAniSprite);
+	return pFrameAniSprite;
+}
+
+void CSceneManager::onRender(float delay)
 {
 	MovableObjectLst::iterator objIter;
 	for (objIter=m_movableLsts.begin(); objIter!=m_movableLsts.end(); ++objIter)
 	{
 		//(*iter)->OnRender();
+		CFrameAniSprite* pFrameAniSprite = dynamic_cast<CFrameAniSprite*>(*objIter);
+		if (pFrameAniSprite!=MATH_NULL)
+			pFrameAniSprite->update(delay);
+
 		const CMovableObject::RenderDataLst& renderData = (*objIter)->getRenderDataLst();
 		CMovableObject::RenderDataLst::const_iterator iter;
 		for (iter=renderData.begin(); iter!=renderData.end(); ++iter)

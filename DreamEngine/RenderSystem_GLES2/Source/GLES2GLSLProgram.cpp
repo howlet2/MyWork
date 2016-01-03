@@ -222,10 +222,9 @@ void CGLES2GLSLProgram::_updateUniformParams(CShaderParam* pParam)
 
 			int layer = pTexture->getTexCoordLayer();
 			glActiveTexture(GL_TEXTURE0+layer);										
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);				
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);	
-			glBindTexture(pTexture->getUsage(), texture);
-			glUniform1i(iLocal, layer);					
+			
+			glBindTexture(GL_TEXTURE_2D, texture);
+			glUniform1i(iLocal, layer);	
 		}break;
 
 	case GL_FLOAT:

@@ -1,5 +1,6 @@
 #include "Root.h"
 #include "WindowEventUtilities.h"
+#include "Timer.h"
 
 #ifdef WIN32
 #include "vld/include/vld.h"
@@ -143,6 +144,8 @@ void CRoot::loop()
 {
 	if (m_pCurRenderSystem==MATH_NULL)return;
 
+	float timeDelay = calculateTimeDelay();
+
 	CRenderWindow* pRenderWindow = m_pCurRenderSystem->getActiveRenderWindow();
 	CRenderTarget::ListenerTargetIter& rtEventLst = pRenderWindow->getListenerIter();
 
@@ -157,10 +160,10 @@ void CRoot::loop()
 
 	//rendering
 	if (m_pTouchSystem != MATH_NULL)
-		m_pTouchSystem->update();
+		m_pTouchSystem->update(timeDelay);
 
 	if (m_pSceneManager != MATH_NULL)
-		m_pSceneManager->onRender();
+		m_pSceneManager->onRender(timeDelay);
 
 	rtEventLst.moveToBegin();
 	while (rtEventLst.hasMore())
@@ -178,7 +181,18 @@ void CRoot::loop()
 		rtEventLst.Next();
 	}
 
-	pRenderWindow->updateFPS();
+	pRenderWindow->updateFPS(timeDelay);
+}
+
+float CRoot::calculateTimeDelay()
+{
+	static Math::CTimer time;
+	static Math::m_dwrd last = time.getMillisecondsCPU();
+	Math::m_dwrd cur		 = time.getMicrosecondsCPU();
+
+	float timeDelay = (cur-last);
+	last = cur;
+	return timeDelay;
 }
 
 }

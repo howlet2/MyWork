@@ -44,9 +44,7 @@ enum TEX_FORMAT
 	TF_R8G8B8      = 1,
 	TF_A8R8G8B8    = 2,
 	TF_R8G8B8A8	   = 3,
-	TF_X8R8G8B8    = 4,
 	TF_L8          = 5,
-	TF_X8L8V8U8    = 6,
 };
 
 }

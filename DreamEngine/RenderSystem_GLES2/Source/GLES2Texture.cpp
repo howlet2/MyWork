@@ -54,11 +54,7 @@ Error CGLES2Texture::_createTexture( TEX_FORMAT texFormat,
 	m_pData = new GLubyte[dataSize];
 	memset(m_pData, 0, dataSize);
 
-	GLint glTexFormat = CCommonFunction::TexFormatToGLES2Format(m_format);
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE0, m_texture);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, caulateUnpackAlignment(m_width));												
-	glTexImage2D(GL_TEXTURE_2D, m_mipLevels, glTexFormat, m_width, m_height, 0, glTexFormat, GL_UNSIGNED_BYTE, m_pData); 
+	buildTexture(); 
 
 	return ERROR_OK;
 }
@@ -74,9 +70,10 @@ Error CGLES2Texture::_createTextureFromFile(const CString& fileName,
 	
 
 	CImages img;
-	GLubyte* pData = img.loadFromFile(fileName);
+	GLubyte* pData = MATH_NULL;
+	if (img.loadFromFile(fileName))
+		pData = img.getData();
 	
-
 	if (m_format==TF_UNKOWN)
 		m_format=img.getTexFormat();
 
@@ -90,12 +87,7 @@ Error CGLES2Texture::_createTextureFromFile(const CString& fileName,
 	m_pData = new GLubyte[dataSize];
 	memset(m_pData, 0, dataSize);
 	memcpy(m_pData, pData, dataSize);
-
-	GLint glTexFormat = CCommonFunction::TexFormatToGLES2Format(m_format);
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE0, m_texture);
-	glPixelStorei(GL_UNPACK_ALIGNMENT, caulateUnpackAlignment(m_width));												
-	glTexImage2D(GL_TEXTURE_2D, m_mipLevels, glTexFormat, m_width, m_height, 0, glTexFormat, GL_UNSIGNED_BYTE, m_pData); 
+	buildTexture();
 
 	return ERROR_OK;
 }
@@ -123,6 +115,24 @@ int CGLES2Texture::caulateUnpackAlignment(GLint width)
 	}
 
 	return 1;
+}
+
+void CGLES2Texture::buildTexture()
+{
+	glPixelStorei(GL_UNPACK_ALIGNMENT, caulateUnpackAlignment(m_width));	
+
+	glGenTextures(1, &m_texture);
+	int texCoordLayer = getTexCoordLayer();
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+
+	GLint glTexFormat = CCommonFunction::TexFormatToGLES2Format(m_format);
+
+	glTexImage2D(GL_TEXTURE_2D, m_mipLevels, glTexFormat, m_width, m_height, 0, glTexFormat, GL_UNSIGNED_BYTE, m_pData); 
 }
 
 }

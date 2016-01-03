@@ -11,13 +11,18 @@ public:
 	CImages(void);
 	~CImages(void);
 
+	static CImages*	makeImage(m_byte* pData, int width, int height, TEX_FORMAT texFormat);
+	static int		formatToPixelPerBytes(TEX_FORMAT format);
+
 	m_byte*		getData()const			{return m_pData;}
 	int			getWidth()const			{return m_width;}
 	int			getHeight()const		{return m_height;}
 	TEX_FORMAT  getTexFormat()const		{return m_texFormat;}
 	int			getPixelPerBytes()const	{return m_pixelPerBytes;}
+	int			getDataSize()const		{return getHeight()*getWidth()*getPixelPerBytes();}
 
-	m_byte*		loadFromFile(const CString& fileName);
+	bool		loadFromFile(const CString& fileName);
+	bool		saveToFile(const CString& filePath);
 
 private:
 	
@@ -28,6 +33,9 @@ private:
 	m_byte*		initWithTgaFile(CFileDataStream& fileData);
 	m_byte*		initWithPngFile(CFileDataStream& fileData);
 	m_byte*		initWithJpegFile(CFileDataStream& fileData);
+
+	bool		saveToPng(const CString& filePath);
+	bool		saveToJpg(const CString& filePath);
 
 protected:
 

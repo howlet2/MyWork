@@ -90,8 +90,14 @@ void CSprite::onDestroy()
 
 void CSprite::setTexture(CTexture* pTexture)
 {
-	if (m_bAuotCreate && m_pTexture!=nullptr)
+	if (m_bAuotCreate && m_pTexture!=MATH_NULL)
 		CVideoManager::instancePtr()->destoryTexture(m_pTexture->getName());
+
+	if (m_pMaterial != MATH_NULL)
+	{
+		CShaderParam* pParam = m_pMaterial->getGpuProgram()->getShaderParamTable()->getParam("s_texture");
+		pParam->setAddressVaule(m_pTexture);
+	}
 
 	m_bAuotCreate = false;
 	m_pTexture = pTexture;
@@ -99,8 +105,9 @@ void CSprite::setTexture(CTexture* pTexture)
 
 void CSprite::setTexture(const CString& texFileName)
 {
+	CTexture* pTexture = CVideoManager::instancePtr()->createTextureFromFile(TEXTURE_NAME, texFileName);
+	setTexture(pTexture);
 	m_bAuotCreate = true;
-	m_pTexture = CVideoManager::instancePtr()->createTextureFromFile(TEXTURE_NAME, texFileName);
 }
 
 }

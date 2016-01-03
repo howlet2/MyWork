@@ -4,7 +4,7 @@
 
 namespace DreamEngine
 {
-class CSprite : public CMovableObject
+class _EngineExport CSprite : public CMovableObject
 {
 public:
 	CSprite(CRenderSystem* pRenderSystem, const CString& name);
