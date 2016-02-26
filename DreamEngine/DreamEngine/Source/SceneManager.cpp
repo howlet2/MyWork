@@ -104,15 +104,6 @@ CFrameAniSprite* CSceneManager::createFrameAniSprite(const CString& name, const 
 	return pFrameAniSprite;
 }
 
-CFrameAniSprite* CSceneManager::createFrameAniSprite(const CString& name, const CString& fileName)
-{
-	CFrameAniSprite* pFrameAniSprite = new CFrameAniSprite(m_pRenderSystem, name);
-	pFrameAniSprite->initWithAnimationFile(fileName);
-
-	m_movableLsts.push_back(pFrameAniSprite);
-	return pFrameAniSprite;
-}
-
 void CSceneManager::onRender(float delay)
 {
 	MovableObjectLst::iterator objIter;

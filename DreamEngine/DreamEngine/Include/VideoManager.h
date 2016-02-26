@@ -53,6 +53,13 @@ public:
 												  RSPOOL			pool=RSP_MANAGER,
 												  m_dwrd			usage=0, 
 												  m_uint16			mipLevel=0)=0;
+
+	virtual	CTexture*		createTextureFromImage(const CString&	name,
+												   CImages*		pImage,
+												   RSPOOL			pool=RSP_MANAGER,
+												   m_dwrd			usage=0, 
+												   m_uint16		mipLevel=0)=0;
+
 	virtual bool			destoryTexture(const CString& name);
 protected:
 

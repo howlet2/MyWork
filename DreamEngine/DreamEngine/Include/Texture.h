@@ -33,6 +33,11 @@ public:
 								   m_dwrd			usage=0, 
 								   m_uint16			mipLevel=0);
 
+	virtual	Error	createFromImage(CImages*		pImage,
+									RSPOOL			pool=RSP_MANAGER,
+									m_dwrd			usage=0, 
+									m_uint16		mipLevel=0);
+
 	virtual void	release()=0;
 	virtual	void	lockTexBuf(TexRect* pTexRect, int mipLevel=0)=0;
 	virtual void	unLockTexBuf(int mipLevel=0)=0;
@@ -68,13 +73,9 @@ protected:
 									m_dwrd			usage=0, 
 									m_uint16		mipLevel=0)=0;		
 
-	virtual Error	_createTextureFromFile( const CString&	fileName, 
-											TEX_FORMAT		textureFormat, 
-											m_uint32		width=0, 
-											m_uint32		height=0,
-											RSPOOL			pool=RSP_MANAGER,
-											m_dwrd			usage=0, 
-											m_uint16		mipLevel=0)=0;
+	virtual Error	_createTextureFromFile( const CString&	fileName)=0;
+
+	virtual Error	_createFromImage(CImages*		pImage)=0;
 	
 protected:
 

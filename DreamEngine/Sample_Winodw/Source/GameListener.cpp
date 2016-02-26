@@ -50,8 +50,8 @@ void CGameListener::onRender(CRenderTarget* rw)
 	CSceneManager* pSceneManager = CRoot::instancePtr()->getSceneManager();
 	if (pInputSystem->getState()==CTouchSystem::STATE_DOWN)
 	{
-		CSceneManager* pSceneManager = CRoot::instancePtr()->getSceneManager();
-		pSceneManager->getMovableObject("xxSprite")->getSceneNode()->setPosition(x,y,0);
+		//CSceneManager* pSceneManager = CRoot::instancePtr()->getSceneManager();
+		//pSceneManager->getMovableObject("xxSprite")->getSceneNode()->setPosition(x,y,0);
 	} 
 }
  

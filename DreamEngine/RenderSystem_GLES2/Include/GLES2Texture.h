@@ -32,13 +32,9 @@ protected:
 									m_dwrd			usage=0, 
 									m_uint16		mipLevel=0);		
 
-	virtual Error	_createTextureFromFile(	const CString&	fileName, 
-											TEX_FORMAT		textureFormat=TF_UNKOWN, 
-											m_uint32		width=0, 
-											m_uint32		height=0,
-											RSPOOL			pool=RSP_MANAGER,
-											m_dwrd			usage=0, 
-											m_uint16		mipLevel=0);
+	virtual Error	_createTextureFromFile(const CString&	fileName);
+
+	virtual Error	_createFromImage(CImages*		pImage);
 
 private:
 

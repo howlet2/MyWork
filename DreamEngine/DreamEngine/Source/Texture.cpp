@@ -56,7 +56,25 @@ Error CTexture::createFromFile(
 	m_pool		=	pool;
 	m_mipLevels	=	mipLevel;
 
-	return _createTextureFromFile(fileName, texFormat, width, height, pool, usage, mipLevel);
+	return _createTextureFromFile(fileName);
+}
+
+Error CTexture::createFromImage(CImages* pImage, 
+								RSPOOL pool/* =RSP_MANAGER */, 
+								m_dwrd usage/* =0 */, 
+								m_uint16 mipLevel/* =0 */)
+{
+	m_format	=	pImage->getTexFormat();
+	m_width		=	pImage->getWidth();
+	m_height	=	pImage->getHeight();
+
+	m_pool = pool;
+	m_usage = usage;
+	m_mipLevels = mipLevel;
+
+	_createFromImage(pImage);
+
+	return ERROR_OK;
 }
 
 CColor CTexture::getPixelColor(int x, int y)

@@ -104,5 +104,20 @@ CTexture* CGLES2VideoManager::createTextureFromFile( const CString& name,
 	return pGles2Texture;
 }
 
+
+CTexture*	CGLES2VideoManager::createTextureFromImage(const CString&	name,
+													   CImages*		pImage,
+													   RSPOOL		pool,
+												       m_dwrd		usage, 
+											           m_uint16		mipLevel)
+{
+	CGLES2Texture* pGles2Texture = new CGLES2Texture(name);
+
+	pGles2Texture->createFromImage(pImage, pool, usage, mipLevel);
+	m_textures[name] = pGles2Texture;
+
+	return pGles2Texture;
+
+}
 }
 

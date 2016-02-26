@@ -49,6 +49,12 @@ public:
 												  m_dwrd			usage=0, 
 												  m_uint16			mipLevel=0);
 
+	virtual	CTexture*		createTextureFromImage(const CString&	name,
+												   CImages*		pImage,
+												   RSPOOL		pool=RSP_MANAGER,
+												   m_dwrd		usage=0, 
+												   m_uint16		mipLevel=0);
+
 protected:
 
 	//CD3D9Device*			m_pDevice;

@@ -33,8 +33,6 @@ public:
 	CSprite*			createSprite(const CString& name, const CString& fileName);
 	CFrameAniSprite*	createFrameAniSprite(const CString& name, const char* pFileName, ...);
 
-	CFrameAniSprite*	createFrameAniSprite(const CString& name, const CString& fileName);
-
 	virtual void		onRender(float delay);
 	virtual void		onLostDevice();
 	virtual void		onResetDevice();

@@ -59,34 +59,34 @@ Error CGLES2Texture::_createTexture( TEX_FORMAT texFormat,
 	return ERROR_OK;
 }
 
-Error CGLES2Texture::_createTextureFromFile(const CString& fileName, 
-											TEX_FORMAT texFormat/*=TF_UNKOWN*/, 
-											m_uint32 width/* =0 */, 
-											m_uint32 height/* =0 */, 
-											RSPOOL pool/* =RSP_MANAGER */, 
-											m_dwrd usage/* =0 */, 
-											m_uint16 mipLevel/* =0 */)
+Error CGLES2Texture::_createTextureFromFile(const CString& fileName)
 {
-	
-
-	CImages img;
+	CImages image;
 	GLubyte* pData = MATH_NULL;
-	if (img.loadFromFile(fileName))
-		pData = img.getData();
+	if (image.loadFromFile(fileName))
+		pData = image.getData();
 	
 	if (m_format==TF_UNKOWN)
-		m_format=img.getTexFormat();
+		m_format=image.getTexFormat();
 
 	if (m_width==0)
-		m_width = img.getWidth();
+		m_width = image.getWidth();
 	if (m_height==0)
-		m_height = img.getHeight();
+		m_height = image.getHeight();
 
+	_createFromImage(&image);
+
+	return ERROR_OK;
+}
+
+Error CGLES2Texture::_createFromImage(CImages* pImage)
+{
 	SAFE_DELETE_ARRY(m_pData)
-	int dataSize = m_width*m_height*img.getPixelPerBytes();
+
+	int dataSize =pImage->getDataSize();
 	m_pData = new GLubyte[dataSize];
 	memset(m_pData, 0, dataSize);
-	memcpy(m_pData, pData, dataSize);
+	memcpy(m_pData, pImage->getData(), dataSize);
 	buildTexture();
 
 	return ERROR_OK;

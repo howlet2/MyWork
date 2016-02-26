@@ -18,12 +18,20 @@ public:
 	void				destory(void);
 
 	CTexture*			getCurrentTexture(void)const;
+
+	bool				setAinimationIndex(int index);
+
+	int					getAnimationIndex(void)const;
+	int					getAnimationNum(void)const;
 	int					getFrameIndex(void)const;
 	int					getFrameNum(void)const;
+
+	const CVector2&		getUV(void)const;
 
 protected:
 
 	bool		parseFromFile(const std::string& animationFile);
+	CVector2	caculateUV(int animationIdx, int frameIdx);
 
 protected:
 
@@ -34,8 +42,12 @@ protected:
 	int				m_frameNum;
 	CVector2		m_imageSize;
 	CVector2		m_frameImageSize;
-	CImages*		m_pImageData;
+	CTexture*		m_pTexture;
+
+	int				m_animationIndex;
 	int				m_frameIndex;
+
+	CVector2		m_uv;
 
 	float			m_intervalSec;
 	float			m_accumulateTime;
