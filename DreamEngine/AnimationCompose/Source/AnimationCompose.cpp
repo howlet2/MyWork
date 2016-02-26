@@ -31,7 +31,7 @@ bool CAnimationCompose::compose(const CString& floder, const CString& targetName
 	m_floder = floder;
 	m_targetName = targetName;
 
-	pickImage(m_floder);
+	pickImage(m_floder, m_images);
 	return composeImage(m_images);
 }
 
@@ -53,6 +53,16 @@ void CAnimationCompose::splitFlieNameAndFolder(const CString& fullPath, OUT CStr
 	}
 }
 
+void CAnimationCompose::splitFlieNameAndSuffix(const CString& fileName, OUT CString& name, OUT CString& suffix)
+{
+	CString::size_type pos = fileName.rfind('.');
+	if (pos != CString::npos)
+	{
+		name.assign(fileName.c_str(), pos);
+		suffix.assign(fileName.c_str()+pos+1, fileName.length()-pos-1);
+	}
+}
+
 void CAnimationCompose::setImgNumPerRowAndCol(int rowNum, int colNum)
 {
 	m_imgNumPerRow = rowNum;
@@ -68,6 +78,7 @@ bool CAnimationCompose::composeImage(const ImageLst& imageFiles)
 	int imgHeight		= 0;
 	int smallImgWidth	= 0;
 	int smallImgHeight	= 0;
+	CImages::ImageType imgeType=CImages::TYPE_PNG;
 
  	TEX_FORMAT texFormat = TF_UNKOWN;
 	for (int i=0; i<int(imageFiles.size()); ++i)
@@ -78,6 +89,7 @@ bool CAnimationCompose::composeImage(const ImageLst& imageFiles)
 		if (i==0)
 		{
 			texFormat		= pImage->getTexFormat();
+			imgeType		= pImage->getImageType();
 
 			smallImgWidth	= pImage->getWidth();
 			smallImgHeight	= pImage->getHeight();
@@ -114,15 +126,61 @@ bool CAnimationCompose::composeImage(const ImageLst& imageFiles)
 	if(_mkdir((m_floder+"out/").c_str())!=0)
 	{
 		CImages* pImage = CImages::makeImage(pData, imgWidth, imgHeight, texFormat);
-		pImage->saveToFile(m_floder+"out/"+m_targetName);
+		CString targetFile = m_floder+"out/"+m_targetName+".ani";
+		pImage->saveToFile(targetFile);
+		makeAnimationFile(targetFile, CVector2(imgWidth, imgHeight));
+
 		SAFE_DELETE(pImage);
 	}
 	SAFE_DELETE(pData);
 	return true;
 }
 
-void CAnimationCompose::pickImage(const CString& floder)
+void CAnimationCompose::makeAnimationFile(const CString& targetFlie, CVector2 imageSize)
 {
+	CFileDataStream fileStream;
+
+	char* pOldData = MATH_NULL;
+	int   oldSize = 0;
+	if (fileStream.open(targetFlie, CFileDataStream::READ_BINARY))
+	{
+		oldSize = fileStream.getSize();
+		pOldData = new char[oldSize];
+		fileStream.read(pOldData, oldSize);
+		fileStream.close();
+	}
+
+	if (fileStream.open(targetFlie, CFileDataStream::WRITE_BINARY))
+	{
+		int nameLen = m_targetName.length();
+		char* pName = new char[nameLen+1];
+		memcpy(pName, m_targetName.c_str(),nameLen);
+		pName[nameLen] = '\0';
+		fileStream.write(&nameLen, sizeof(nameLen));					//target name length
+		fileStream.write(pName, nameLen);								//name
+		SAFE_DELETE_ARRY(pName);
+
+		fileStream.write(&m_imgNumPerCol, sizeof(m_imgNumPerCol));		//animation num
+		fileStream.write(&m_imgNumPerRow, sizeof(m_imgNumPerRow));		//frameNum
+		fileStream.write(&imageSize, sizeof(imageSize));				//imageSize 
+
+		CVector2 frameImageSize;
+		frameImageSize._ix = imageSize._ix/m_imgNumPerRow;
+		frameImageSize._iy = imageSize._iy/m_imgNumPerCol;
+		fileStream.write(&frameImageSize, sizeof(frameImageSize));		//frame images size
+
+		if (oldSize>0)
+			fileStream.write(pOldData, oldSize);
+		fileStream.close();
+	}
+
+	SAFE_DELETE_ARRY(pOldData);
+}
+
+void CAnimationCompose::pickImage(const CString& floder,  OUT ImageLst& images)
+{
+	images.clear();
+
 	CString path = floder+"*.*";
 	long handle;
 	_finddata_t fileInfo;
@@ -140,9 +198,9 @@ void CAnimationCompose::pickImage(const CString& floder)
 				||flieName.find(".tga")!=CString::npos
 				||flieName.find(".jpg")!=CString::npos)
 			{
-				m_images.push_back(floder+fileInfo.name);
+				images.push_back(floder+fileInfo.name);
 
-				if (int(m_images.size())>=(m_imgNumPerRow*m_imgNumPerCol))
+				if (int(images.size())>=(m_imgNumPerRow*m_imgNumPerCol))
 					break;
 			}
 		} while (_findnext(handle,&fileInfo)==0);

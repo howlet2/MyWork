@@ -1,5 +1,6 @@
 #include "Animation/FrameAnimation.h"
 #include "StringHelper.h"
+#include "VideoManager.h"
 
 namespace DreamEngine
 {
@@ -31,15 +32,18 @@ bool CFrameAnimation::initWithFiles(const char* pFileName, ...)
 	ret = initWithFilesByVaLst(pFileName,args);
 	va_end(args);
 	
-
 	return ret;
 }
 
 bool CFrameAnimation::initWithFilesByVaLst(const char* pFileName, va_list fileNames)
 {
-	for (const char* pFile=pFileName; pFile!=MATH_NULL; pFile=static_cast<const char*>(va_arg(fileNames, const char*))) 
+	const char* pFile = pFileName;
+	while (pFile!=MATH_NULL)
+	{
 		addFrame(pFile);
-
+		pFile=static_cast<const char*>(va_arg(fileNames, const char*));
+	}
+	
 	return true;
 }
 

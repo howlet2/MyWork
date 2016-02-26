@@ -162,6 +162,9 @@
     <ClCompile Include="Source\MovableObject\FrameAniSprite.cpp">
       <Filter>源文件\MoveObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Animation\FrameAnimationGroup.cpp">
+      <Filter>源文件\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Camera.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="Include\MovableObject\FrameAniSprite.h">
       <Filter>头文件\MoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Animation\FrameAnimationGroup.h">
+      <Filter>头文件\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

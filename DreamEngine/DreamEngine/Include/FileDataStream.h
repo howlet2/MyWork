@@ -12,13 +12,15 @@ public:
 	{
 		READ	= std::ios::in,					//read
 		WRITE	= std::ios::out,				//write
-		APP	    = std::ios::app,				//open pos to end
+		APP	    = std::ios::app,				//open pos to end (can not change pos)
+		ATE	    = std::ios::ate,				//open pos to end (can change pos)
 		TRUNC   = std::ios::trunc,				//remove all data before open 
 
-		READ_BINARY	= std::ios::in|std::ios::binary, 
-		WRITE_BINARY= std::ios::out|std::ios::binary, 
-		WRITE_TRUNC = std::ios::out|std::ios::trunc,
-		WRITE_APP	= std::ios::out|std::ios::app,
+		READ_BINARY		= std::ios::in|std::ios::binary, 
+		WRITE_BINARY	= std::ios::out|std::ios::binary, 
+		WRITE_TRUNC		= std::ios::out|std::ios::trunc,
+		WRITE_APP		= std::ios::out|std::ios::app,
+		WRITE_APP_BINARY= std::ios::out|std::ios::app|std::ios::binary,
 	};
 
 	enum FilePos

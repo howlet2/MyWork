@@ -34,6 +34,7 @@ bool CFileDataStream::close()
 	if (m_fstream.is_open())
 	{
 		m_fstream.close();
+		m_fstream.clear();
 	}
 	return true;
 }

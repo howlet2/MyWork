@@ -190,7 +190,7 @@ float CRoot::calculateTimeDelay()
 	static Math::m_dwrd last = time.getMillisecondsCPU();
 	Math::m_dwrd cur		 = time.getMicrosecondsCPU();
 
-	float timeDelay = (cur-last);
+	float timeDelay = float(cur-last);
 	last = cur;
 	return timeDelay;
 }

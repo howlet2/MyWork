@@ -1,6 +1,6 @@
 #pragma once
 #include "EngineObject.h"
-#include "MovableObject/Sprite.h"
+#include "Texture.h"
 
 namespace DreamEngine
 {

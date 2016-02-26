@@ -17,7 +17,8 @@ m_pData(MATH_NULL),
 m_height(0),
 m_width(0),
 m_texFormat(TF_UNKOWN),
-m_pixelPerBytes(0)
+m_pixelPerBytes(0),
+m_imgType(TYPE_PNG)
 {
 }
 
@@ -32,21 +33,41 @@ bool CImages::loadFromFile(const CString& fileName)
 	CFileDataStream file;
 	if (file.open(fileName, CFileDataStream::READ_BINARY))
 	{
-		SAFE_DELETE_ARRY(m_pData);
-		m_byte header[FILE_HEAR_SIZE] = {0};
-		if (file.read(header, sizeof(header)))
+		if (loadFromFileStream(file))
 		{
-			file.moveToBegin();
-
-			if (isTga(header))
-				initWithTgaFile(file);
-			else if(isPng(header))
-				initWithPngFile(file);
-			else if(isJpeg(header))
-				initWithJpegFile(file);
+			file.close();
+			return true;
 		}
-		
-		file.close();
+		else
+			return false;
+	}
+	return false;
+}
+
+bool CImages::loadFromFileStream(CFileDataStream& fileStream)
+{
+	SAFE_DELETE_ARRY(m_pData);
+	m_byte header[FILE_HEAR_SIZE] = {0};
+	if (fileStream.read(header, sizeof(header)))
+	{
+		fileStream.seek(-sizeof(header),CFileDataStream::CUR);
+
+		if (isTga(header))
+		{
+			m_imgType = TYPE_TGA;
+			initWithTgaFile(fileStream);
+		}
+		else if(isPng(header))
+		{
+			m_imgType = TYPE_PNG;
+			initWithPngFile(fileStream);
+		}
+		else if(isJpeg(header))
+		{
+			m_imgType = TYPE_JPG;
+			initWithJpegFile(fileStream);
+		}
+
 		return true;
 	}
 	return false;
@@ -55,16 +76,23 @@ bool CImages::loadFromFile(const CString& fileName)
 bool CImages::saveToFile(const CString& fileName)
 {
 	if (fileName.length()<4) return false;
-
-	if (CString::npos != fileName.find(".png"))
+	switch (m_imgType)
 	{
+	case TYPE_PNG:
 		return saveToPng(fileName);
-	}
-	else if (CString::npos != fileName.find(".jpg"))
-	{
-		return saveToJpg(fileName);
-	}
+		break;
 
+	case TYPE_JPG:
+		return saveToJpg(fileName);
+		break;
+
+	case TYPE_TGA:
+		return false;
+		break;
+	default:
+		return false;
+		break;
+	}
 	return true;
 }
 
@@ -104,6 +132,19 @@ int CImages::formatToPixelPerBytes(TEX_FORMAT format)
 		break;
 	}
 	return 0;
+}
+
+CString CImages::typeToFileSuffix(ImageType imageType)
+{
+	switch (imageType)
+	{
+	case TYPE_PNG:return ".png";
+	case TYPE_JPG:return ".jpg";
+	case TYPE_TGA:return ".tga";
+	default:
+		break;
+	}
+	return "";
 }
 
 bool CImages::isTga(m_byte* header)

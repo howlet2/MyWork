@@ -16,13 +16,15 @@ public:
 
 	bool			compose(const CString& floder, const CString& targetName);
 	static void		splitFlieNameAndFolder(const CString& fullPath, OUT CString& fileName, OUT CString& floder);
+	static void		splitFlieNameAndSuffix(const CString& fileName, OUT CString& name, OUT CString& suffix);
 
 	void			setImgNumPerRowAndCol(int rowNum, int colNum);
 
 private:
 
-	void		pickImage(const CString& floder);
+	void		pickImage(const CString& floder, OUT ImageLst& images);
 	bool		composeImage(const ImageLst& imageFiles);
+	void		makeAnimationFile(const CString& targetName, CVector2 imageSize);
 
 private:
 

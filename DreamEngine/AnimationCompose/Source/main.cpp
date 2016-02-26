@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 	CAnimationCompose compose;
 	CAnimationCompose::splitFlieNameAndFolder(argv[0], curName, curFloder);
 	
-	std::cout << "input target file name" << std::endl;
+	std::cout << "input target name" << std::endl;
 	CString targetFolderName;
 	std::cin >> targetFolderName;
 		
